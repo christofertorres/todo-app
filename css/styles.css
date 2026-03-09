@@ -375,10 +375,8 @@ select {
 /* Contato */
 
 .credits {
-  bottom: 0;
-  left: 50%;
-  position: fixed;
-  translate: -50%;
+  width: 205px;
+  height: 100px;
   margin: 0 auto 2.5rem;
   display: flex;
   flex-direction: column;
@@ -386,7 +384,7 @@ select {
   justify-content: center;
   gap: 0.3rem;
   background-color: var(--primaria);
-  padding: .7rem;
+  padding: .5rem;
   border-radius: 15px;
   font-weight: bold;
   transition: background-color var(--transition);
@@ -407,7 +405,7 @@ select {
 
 .links a i {
   margin-top: .5rem;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   color: var(--texto);
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
