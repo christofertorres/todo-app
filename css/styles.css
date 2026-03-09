@@ -1,0 +1,437 @@
+/* Geral */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Urbanist", sans-serif;
+}
+
+:root {
+  --primaria: #112e83;
+  --texto: #fff;
+  --texto-secundaria: #fff;
+  --sombra-primaria: #222;
+  --sombra-secundaria: #777;
+  --borda-primaria: #ccc;
+  --variante: #fdfdfd;
+  --variante-secundaria: #000244;
+  --done: #ededed;
+  --todo: #112277;
+  --transition: 0.35s ease;
+}
+
+.dark {
+  --primaria: #7a8ec5;
+  --texto: #fff;
+  --texto-secundaria: #444;
+  --sombra-primaria: #222;
+  --sombra-secundaria: #777;
+  --borda-primaria: #6dc4db;
+  --variante: #fdfdfd;
+  --variante-secundaria: #fff;
+  --done: #306997;
+  --todo: #a8e3f3;
+}
+
+html {
+  min-height: 100dvh;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-image: url("../img/bg.jpg");
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  color: var(--texto);
+  transition: color var(--transition);
+}
+
+/* Troca de bg */
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("../img/bgg.jpg");
+  background-position: center;
+  background-size: cover;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: -1;
+}
+
+body.dark::before {
+  opacity: 1;
+}
+
+/* Botão de dark mode*/
+
+#mode {
+  position: relative;
+  padding: 0;
+  width: 50px;
+  height: 50px;
+  margin: 4rem auto 2.5rem;
+  border-radius: 50%;
+  background-color: var(--primaria);
+  box-shadow: 0 0 10px 2px var(--sombra-primaria);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+  transform .4s ease,
+    background-color var(--transition),
+    box-shadow var(--transition);
+}
+
+#mode svg {
+  fill: var(--texto);
+  position: absolute;
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
+}
+
+#mode svg:first-child {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+#mode svg:last-child {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.7);
+}
+
+.dark #mode svg:first-child {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.7);
+}
+
+.dark #mode svg:last-child {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+/* Botões */
+
+button {
+  background-color: var(--variante);
+  color: var(--primaria);
+  border: 1px solid var(--primaria);
+  padding: 0.3rem 0.6rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition:
+    background-color var(--transition),
+    color var(--transition),
+    border-color var(--transition),
+    transform 0.15s ease;
+  border-radius: 7px;
+}
+
+button:hover {
+  background-color: var(--primaria);
+  border: 1px solid var(--texto);
+  color: var(--texto);
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0px);
+}
+
+button:hover > i {
+  color: var(--texto);
+}
+
+button i {
+  color: var(--primaria);
+  font-weight: bold;
+  pointer-events: none;
+  transition: color var(--transition);
+}
+
+button:hover i {
+  color: var(--texto);
+}
+
+/* Inputs */
+
+input,
+select {
+  border: 1px solid var(--primaria);
+  padding: 0.25rem 0.5rem;
+  border-radius: 7px;
+  background-color: var(--variante);
+  transition:
+    border-color var(--transition),
+    box-shadow var(--transition);
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--primaria);
+  box-shadow: 0 0 0 3px rgba(112, 142, 197, 0.25);
+}
+
+select {
+  color: #333;
+}
+
+.hide {
+  display: none;
+}
+
+/* Container */
+
+.todo-container {
+  max-width: 450px;
+  margin: 0 auto 5rem;
+  padding: 1.5rem;
+  background-color: var(--primaria);
+  border-radius: 15px;
+  box-shadow: 0 0 10px 0px var(--sombra-primaria);
+  transition:
+    background-color var(--transition),
+    box-shadow var(--transition);
+}
+
+.todo-container header {
+  text-align: center;
+  padding: 0 1rem 0.7rem;
+  border-bottom: 1px solid var(--borda-primaria);
+  margin-bottom: 0.3rem;
+  transition: border-color var(--transition);
+}
+
+/* Form */
+
+#todo-form,
+#edit-form {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--borda-primaria);
+  flex-direction: column;
+  align-items: center;
+  transition: border-color var(--transition);
+}
+
+#todo-form:not(.hide),
+#edit-form:not(.hide) {
+  display: flex;
+}
+
+#todo-form p,
+#edit-form p {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  align-self: flex-start;
+  padding-left: 0.2rem;
+}
+
+.form-control {
+  display: flex;
+  width: 100%;
+}
+
+.form-control input {
+  flex: 1;
+  margin-right: 0.3rem;
+}
+
+#cancel-edit-btn {
+  margin-top: 0.7rem;
+  font-size: 0.8rem;
+  font-weight: bold;
+  align-self: flex-start;
+}
+
+/* Toolbar */
+
+#toolbar {
+  padding: 1rem;
+  border-bottom: 1px solid var(--borda-primaria);
+  display: flex;
+  transition: border-color var(--transition);
+}
+
+#toolbar h4 {
+  margin-bottom: 0.5rem;
+  margin-left: 0.2rem;
+}
+
+#search {
+  border-right: 1px solid var(--borda-primaria);
+  padding-right: 1rem;
+  margin-right: 1rem;
+  width: 65%;
+  display: flex;
+  flex-direction: column;
+  transition: border-color var(--transition);
+}
+
+#search form {
+  display: flex;
+}
+
+#search input {
+  width: 100%;
+  margin-right: 0.3rem;
+}
+
+#filter {
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+}
+
+#filter select {
+  flex: 1;
+}
+
+/* Todos */
+
+.todo {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 10px;
+  color: var(--texto-secundaria);
+  background-color: var(--todo);
+  box-shadow: 0 0 5px 0px var(--todo);
+  transition:
+    background-color var(--transition),
+    color var(--transition),
+    box-shadow var(--transition),
+    transform 0.2s ease;
+  animation: slideIn 0.2s ease;
+}
+
+.todo:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.todo h3 {
+  flex: 1;
+  font-size: 0.9rem;
+}
+
+.todo button {
+  margin-left: 0.4rem;
+  font-size: 0.8rem;
+}
+
+.done {
+  background-color: var(--done);
+  color: var(--variante-secundaria);
+  box-shadow: 0 0 5px 0px var(--done);
+}
+
+.done h3 {
+  text-decoration: line-through;
+  font-style: italic;
+}
+
+/* Animação de entrada e saída */
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 100px;
+    margin-top: 1rem;
+    padding: 1rem;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+    max-height: 0;
+    margin-top: 0;
+    padding: 0;
+  }
+}
+
+.todo.removing {
+  animation: slideOut 0.2s ease forwards;
+}
+
+/* Contato */
+
+.credits {
+  bottom: 0;
+  left: 50%;
+  position: fixed;
+  translate: -50%;
+  margin: 0 auto 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  background-color: var(--primaria);
+  padding: .7rem;
+  border-radius: 15px;
+  font-weight: bold;
+  transition: background-color var(--transition);
+}
+
+.credits p {
+  text-align: center;
+}
+
+.links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.links a {
+  color: var(--texto);
+}
+
+.links a i {
+  margin-top: .5rem;
+  font-size: 1.5rem;
+  color: var(--texto);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.links a:hover i {
+  transform: scale(1.1);
+}
+
+/* Responsivo */
+
+@media (max-width: 485px) {
+  .todo-container {
+    max-width: 380px;
+  }
+}
+
+@media (max-width: 390px) {
+  .todo-container {
+    max-width: 350px;
+  }
+}
+
+@media (max-width: 350px) {
+  .todo-container {
+    max-width: 300px;
+  }
+}
